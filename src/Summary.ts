@@ -12,6 +12,10 @@ export interface OutPutTarget {
     print(report: string): void
 }
 
+// Using composition classes here  ie we are delegating 
+// Analysing data to analyse data (new WinsAnalysis)  and delegating ouput to another
+// class .
+
 export class Summary {
     constructor(public analyser: Analyser, public outputTarget: OutPutTarget){}
 

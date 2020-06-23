@@ -13,15 +13,20 @@ import { MatchResult } from "./MatchResult";
 
 
 export class MatchReader {
+  
+  matches: MatchData[] = [];
+
+  // Here we are delegating reading data to a data reader that conforms to DataReader interface
+  // this reads from a csv - it could read from an API
+  constructor(public reader: DataReader) {}
+
+  // using a static method here to return 
+  // a preconfigured instance of the class.
+  // STATIC MEANS WE CAN CALL THE METHOD ON THE CLASS ITSELF
   static fromCsv(filename: string): MatchReader {
     return new MatchReader(new CsvFileReader(filename));
   }
-
-  matches: MatchData[] = [];
-
-  constructor(public reader: DataReader) {}
-
-
+  
   load(): void {
     this.reader.read();
     this.matches = this.reader.data.map(
